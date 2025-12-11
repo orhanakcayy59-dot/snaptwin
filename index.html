@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Snaptwin – Coming Soon</title>
+
     <style>
         body {
             margin: 0;
@@ -18,29 +19,80 @@
             min-height: 100vh;
             text-align: center;
         }
+
         h1 {
             font-size: 3rem;
             margin-bottom: 0.5rem;
         }
+
         p {
             font-size: 1.1rem;
             opacity: 0.75;
             max-width: 480px;
         }
+
         .logo {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: bold;
             margin-bottom: 1rem;
             color: #ff3b7f;
         }
+
+        /* Form stilleri */
+        .waitlist-container {
+            margin-top: 2rem;
+        }
+
+        .waitlist-input {
+            padding: 12px;
+            width: 260px;
+            border-radius: 5px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .waitlist-btn {
+            padding: 12px 20px;
+            background: #ff3b7f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .waitlist-btn:hover {
+            background: #ff2066;
+        }
     </style>
 </head>
+
 <body>
     <div class="logo">Snaptwin</div>
     <h1>We're Launching Soon</h1>
+
     <p>The AI-powered platform to find your global lookalike.</p>
-    <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
-        Join the waitlist feature is under construction.
-    </p>
+
+    <div class="waitlist-container">
+        <p style="font-size: 0.95rem; opacity: 0.85; margin-bottom: 1rem;">
+            Join the waitlist to be one of the first users of Snaptwin.
+        </p>
+
+        <!-- CUSTOM WAITLIST FORM -->
+        <form action="https://formspree.io/f/xkgdpzyq" method="POST">
+            <input 
+                type="email" 
+                name="email" 
+                class="waitlist-input" 
+                placeholder="Enter your email" 
+                required
+            >
+            <button type="submit" class="waitlist-btn">Join</button>
+        </form>
+    </div>
+
 </body>
 </html>
