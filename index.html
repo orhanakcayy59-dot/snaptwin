@@ -73,6 +73,13 @@
             color: #4ade80; /* yeşil */
             display: none;
         }
+
+        .error-message {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #f87171; /* kırmızı */
+            display: none;
+        }
     </style>
 </head>
 
@@ -88,10 +95,7 @@
         </p>
 
         <!-- CUSTOM WAITLIST FORM -->
-        <form action="https://formspree.io/f/xkgdpzyq" method="POST">
-            <!-- Formspree gönderimden sonra tekrar bu sayfaya dönsün -->
-            <input type="hidden" name="_redirect" value="https://snaptwin.app/?success=1">
-
+        <form id="waitlist-form">
             <input 
                 type="email" 
                 name="email" 
@@ -102,19 +106,47 @@
             <button type="submit" class="waitlist-btn">Join</button>
         </form>
 
-        <!-- Başarılı gönderim mesajı -->
         <div id="success-message" class="success-message">
             You’re in! 🎉 We’ll let you know when Snaptwin is live.
+        </div>
+
+        <div id="error-message" class="error-message">
+            Something went wrong. Please try again.
         </div>
     </div>
 
     <script>
-        // URL'de ?success=1 varsa başarı mesajını göster
-        const params = new URLSearchParams(window.location.search);
-        if (params.get('success') === '1') {
-            const msg = document.getElementById('success-message');
-            if (msg) msg.style.display = 'block';
-        }
+        const form = document.getElementById('waitlist-form');
+        const successMsg = document.getElementById('success-message');
+        const errorMsg = document.getElementById('error-message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // sayfadan gitmeyi engelle
+
+            successMsg.style.display = 'none';
+            errorMsg.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const res = await fetch('https://formspree.io/f/xkgdpzyq', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                });
+
+                if (res.ok) {
+                    form.reset();
+                    successMsg.style.display = 'block';
+                } else {
+                    errorMsg.style.display = 'block';
+                }
+            } catch (err) {
+                errorMsg.style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
